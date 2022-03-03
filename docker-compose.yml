@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+
+  #Start pega backend DB
+  pega-postgresql-backend:
+
+    container_name: pega-postgresql-backend
+    
+    build:
+      dockerfile: Dockerfile
+      context: ./Postgresql-BackendDB
+    
+    ports:
+      - 5432:5432
+    
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}  # substitute with db password
+      - POSTGRES_USER=${POSTGRES_USER}  # substitute with db user
+      - POSTGRES_DB=${POSTGRES_DB}  # substitute with db name
+    # - POSTGRES_INITDB_ARGS=-T template0 -E 'UTF8'
+
+    #command: ["scripts/check_ready.sh"]
+    
+    volumes:
+      - ${PEGA_DUMP}:/tmp/resources/  #substitue ${PEGA_DUMP} with directory holding pega.dump file
+
+  #Start pega prweb 
+  pega-frontend:
+    
+    container_name: pega-frontend
+
+    build:
+      dockerfile: Dockerfile
+      context: ./PegaPRPC-WebApp
+
+    environment:
+      - JDBC_URL=jdbc:postgresql://pega-postgresql-backend/${POSTGRES_DB}?raiseExceptionOnSilentRollback=false   #replace this with your postgresql installation ip
+      - DB_USERNAME=${POSTGRES_USER}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_PORT=5432
+      - JDBC_DRIVER_URI=https://jdbc.postgresql.org/download/postgresql-42.2.24.jre6.jar
+      - JDBC_CLASS=org.postgresql.Driver      
+      
+    ports:
+      - 8085:8080     #Use this line only if you have other webservers running on port 8080
+      
+    links:
+      - "pega-postgresql-backend:database"  
+
+    # this makes sure that pega backend is running before pega prpc is launched
+    depends_on:
+     - pega-postgresql-backend
