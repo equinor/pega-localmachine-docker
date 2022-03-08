@@ -1,5 +1,7 @@
 # Docker for PEGA Personal Edition
 
+This is built with strong inspiration from https://github.com/kannan-raveendran-nair/pega-pe-docker
+
 ## Files
 
 PEGA PRPC Personal Edition zip file downloaded from PEGA website
