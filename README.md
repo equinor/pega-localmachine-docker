@@ -18,7 +18,7 @@ PEGA PRPC Personal Edition zip file downloaded from PEGA website
 
 ### 2. Prepare for docker image build  of postgresql
 
-* Extract the file pega.dump from PEGA-PE zip downloaded as mentioned in Files Prerequisite. For example, pega.dump can be located as **115148_PE_721.zip/data/pega.dump** in PEGA-PE 7.2.1. 
+* Extract the file pega.dump from PEGA-PE zip downloaded as mentioned in Files Prerequisite. For example, pega.dump can be located as **117149_PE_8.7/data/pega.dump** in PEGA-PE 8.7
 
 * Mention the location of pega.dump file in the file docker-compose.yml.
 
@@ -59,7 +59,7 @@ PEGA PRPC Personal Edition zip file downloaded from PEGA website
 
 ### 3. Prepare for docker image build  of pega web app
 
-* Extract the file prweb.war from PEGA-PE zip downloaded as mentioned in Files Prerequisite. For example, these files can be located as **115148_PE_721.zip/PRPC_PE.jar/PersonalEdition.zip/tomcat/webapps** in PEGA-PE 7.2.1. 
+* Extract the file prweb.war from PEGA-PE zip downloaded as mentioned in Files Prerequisite. For example, these files can be located as **117149_PE_8.7/PRPC_PE.jar/PersonalEdition.zip/tomcat/webapps** in PEGA-PE 8.7
 
 * Place the files extracted on the previous step to **Project_Root/PegaPRPC-WebApp/resources**
 
